@@ -1,11 +1,11 @@
 package com.anhembimorumbi.si.backjack;
 
 public class Stack {
-	private int dados[];
+	private Carta dados[];
 	private int topo;
 	
 	public Stack(int max) {
-		this.dados = new int[max];
+		this.dados = new Carta[max];
 		this.topo = 0;
 	}
 	
@@ -13,21 +13,21 @@ public class Stack {
 		return this.topo;
 	}
 	
-	public void push(int elem) {
+	public void push(Carta elem) {
 			if(this.dados.length > this.topo) {
 			this.dados[this.topo] = elem;
 			this.topo++;
 		}
 	}
 	
-	public int pop() {
+	public Carta pop() {
 		if(this.topo > 0) {
 			this.topo--;
 			return this.dados[this.topo];
 		}
 		else {
 			System.out.println("Pilha vazia");
-			return -1;
+			return null;
 		}
 	}
 	
