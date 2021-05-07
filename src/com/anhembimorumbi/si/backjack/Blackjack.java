@@ -28,13 +28,15 @@ public class Blackjack {
 		case 1:
 			int qtdDecks;
 			int tamPilha;
-			String acao;
+			int acao;
 			
-			System.out.println("\nNovo Jogo:");
+			System.out.println("\n	Novo jogo iniciado:");
 			
-			System.out.println("Com quantos decks você quer jogar (1-7)?");
+			System.out.print("	Digite com quantos decks você quer jogar (1-7)? R: ");
 			qtdDecks = entrada.nextInt();
 			tamPilha = qtdDecks*52;
+			
+			System.out.print("	-----------------------------------------\n");
 			
 			//Criar deck
 			Carta deck[] = new Carta[tamPilha];
@@ -60,49 +62,79 @@ public class Blackjack {
 			//Jogador 2
 			ArrayList<Carta> jogador2 = new ArrayList<Carta>();
 			int pontosJ2;
+			
+			//Dar duas cartas para o jogador 2
+			
 			jogador2.add(p.pop());
 			jogador2.add(p.pop());
-			System.out.println("\n<<Oponente:>>");
-			System.out.println("As cartas do seu oponente são: " + exibirCartas(jogador2));
+			System.out.println("\n	[[Oponente:]]");
+			System.out.println("	As cartas do seu oponente são: " + exibirCartas(jogador2));
 			pontosJ2 = somarCarta(jogador2);
-			System.out.println("O oponente esta com " + pontosJ2 + " pontos." );
-			if(pontosJ2==21)
-				System.out.println("O oponente venceu");
-			System.out.println("-----------------------------------------\n");
+			System.out.println("	O oponente esta com " + pontosJ2 + " pontos." );
+			System.out.print("	-----------------------------------------\n");
 			
 			
 			//Jogador 1
 			ArrayList<Carta> jogador1 = new ArrayList<Carta>();
+			int pontosJ1;
+			
+			//Dar duas cartas para o jogador 1
 			jogador1.add(p.pop());
 			jogador1.add(p.pop());
-			System.out.println("<<Jogador1:>>");
-			System.out.println("Suas cartas são: " + exibirCartas(jogador1));
-			System.out.println("Você esta com " + somarCarta(jogador1) + " pontos." );
-			System.out.println("-----------------------------------------\n");
+			pontosJ1 = somarCarta(jogador1);
+			System.out.println("\n	<<Jogador1:>>");
+			System.out.println("	Suas cartas são: " + exibirCartas(jogador1));
+			System.out.println("	Você esta com " + pontosJ1 + " pontos." );
 			
-			System.out.println("\nDeseja comprar mais uma carta? (s/n)\n");
-			acao = entrada.next();
+			//Verifica se não tem um vencedor, caso não hover dar a chance ao jogador 1 continuar jogando
+			if(pontosJ1<21 && pontosJ2<22) {
+			System.out.print("\n	|-------------------------------------------|\n");
+			System.out.print("	| Opção 0 - Stand (Parar)                   |\n");
+			System.out.print("	| Opção 1 - Hit (Receber mais uma cartas)   |\n");
+			System.out.print("	|-------------------------------------------|\n");
+			System.out.print(" 			Digite uma opção: ");
 			
-			if(acao.equals("s"))
-				while(acao.equals("s")) {
+//			System.out.println("\nDeseja comprar mais uma carta? (s/n)\n");
+			acao = entrada.nextInt();
+			
+			
+				while(acao == 1 && pontosJ1 <21) {
 					jogador1.add(p.pop());
-					System.out.println("Suas cartas são: " + exibirCartas(jogador1));
-					System.out.println("Você esta com " + somarCarta(jogador1) + " pontos." );
-					System.out.println("Deseja comprar mais uma carta? (s/n)");
-					acao = entrada.next();
-				};
+					pontosJ1 = somarCarta(jogador1);
+					System.out.println("\n	<<Jogador1:>>");
+					System.out.println("	Suas cartas são: " + exibirCartas(jogador1));
+					System.out.println("	Você esta com " + pontosJ1 + " pontos." );
+					
+					System.out.print("\n	|-------------------------------------------|\n");
+					System.out.print("	| Opção 0 - Stand (Parar)                   |\n");
+					System.out.print("	| Opção 1 - Hit (Receber mais uma cartas)   |\n");
+					System.out.print("	|-------------------------------------------|\n");
+					System.out.print(" 			Digite uma opção: ");
+					acao = entrada.nextInt();
+				}
+			}
 			
+			//Verifica o resultado final
+			if((pontosJ1 == pontosJ2) || (pontosJ1 > 21 && pontosJ2 > 21))
+				System.out.println("	*** O jogo acabou empatado! ***");
+			else if((pontosJ1 <= 21) && (pontosJ1 > pontosJ2))
+				System.out.println("		$$$$$ Parabéns, você ganhou! $$$$$");
+			else
+				System.out.println("	::: Ops... Não foi dessa vez, você perdeu. :::");
+				
 			break;
 		
 		case 2:
-			System.out.print("\nDesenvolvedores:\n");
-			System.out.println("Dennis Gomes de Sousa		   |	RA: 21362173");
-			System.out.println("Marcos Custódio Torres		   |	RA: 20149745");
-			System.out.println("Pedro Henrique Siqueira TIhameri   |	RA: 21363765");
+			
+			System.out.print("\n	|--------------> > > Desenvolvedores < < < ---------------------|\n");
+			System.out.println("	|	Dennis Gomes de Sousa		   |	RA: 21362173	|");
+			System.out.println("	|	Marcos Custódio Torres		   |	RA: 20149745	|");
+			System.out.println("	|	Pedro Henrique Siqueira TIhameri   |	RA: 21363765	|");
+			System.out.print("	|---------------------------------------------------------------|\n");
 			break;
 		
 		case 3:
-			System.out.print("\nAté logo!\n");
+			System.out.print("\n		> > > Até logo! < < <		\n");
 			entrada.close();
 			break;
 			
