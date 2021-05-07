@@ -4,6 +4,7 @@ public class Carta {
 	
 	public Integer valor; 
 	public Integer naipe;
+	public Integer peso;
 	
 	public Carta () {
 	}
@@ -11,6 +12,7 @@ public class Carta {
 	public Carta(Integer valor, Integer naipe) {
 		this.valor = valor;
 		this.naipe = naipe;
+		peso = valor>10 ? 10 : valor;
 	}
 	
 	public String mostrarCarta() {
